@@ -1,77 +1,109 @@
-.clock-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  border: 2px solid #333;
-  margin: 20px auto;
-  border-radius: 50%;
-  background: #f4f4f4;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.axes {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
+@charset "UTF-8";
+.clock {
+  all: unset;
+  position: fixed;
+  left: 10px; /* Poziționat în stânga */
+  top: 10px; /* Poziționat sus */
+  width: 150px; /* Dimensiune mai mare pentru un aspect de lux */
+  height: 150px;
+  border-radius: 50%; /* Formă circulară */
+  background-image: url("../res/snowflake.jpg");
+  background-size: 180%;
+  background-position: right;
+  color: black;
+  font-size: 24px; /* Text ușor mai mare */
+  font-weight: bold;
+  border: 5px solid #6879D0;
+  cursor: default;
+  z-index: 99;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-shadow: 0 10px 20px rgba(34, 58, 245, 0.5), inset 0 0 15px rgba(28, 39, 249, 0.5);
+          box-shadow: 0 10px 20px rgba(34, 58, 245, 0.5), inset 0 0 15px rgba(28, 39, 249, 0.5);
+  text-align: center;
+  overflow: hidden; /* Ascunde ornamentele care pot depăși marginile */
+  position: fixed;
 }
 
-.axis {
+.clock:before {
+  content: "";
   position: absolute;
-  background-color: #333;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(0, 0, 255, 0.4);
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(0, 0, 255, 0.4);
+  z-index: -1;
 }
 
-.axis-x {
+/* Ornamente de diamante */
+.clock .diamonds {
+  position: absolute;
   width: 100%;
-  height: 2px;
-}
-
-.axis-y {
-  width: 2px;
   height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  pointer-events: none; /* Diamantele nu blochează interacțiunile */
 }
 
-.clock-hand {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform-origin: bottom;
-  transform: translateX(-50%) rotate(0deg);
-  background-color: #007bff;
-  border-radius: 2px;
-  z-index: 2;
-}
-
-.hour-hand {
-  width: 6px;
-  height: 60px;
-  background-color: #333;
-}
-
-.minute-hand {
-  width: 4px;
-  height: 90px;
-  background-color: #555;
-}
-
-.second-hand {
-  width: 2px;
-  height: 110px;
-  background-color: #ff3333;
-}
-
-.clock-center {
-  position: absolute;
+.clock .diamonds div {
   width: 10px;
   height: 10px;
-  background: #333;
   border-radius: 50%;
-  z-index: 3;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  -webkit-animation: sparkle 2s infinite ease-in-out;
+          animation: sparkle 2s infinite ease-in-out;
 }
+
+/* Poziționarea diamantelor */
+.clock .diamonds div:nth-child(1) {
+  grid-area: 1/2;
+}
+
+.clock .diamonds div:nth-child(2) {
+  grid-area: 2/1;
+}
+
+.clock .diamonds div:nth-child(3) {
+  grid-area: 2/4;
+}
+
+.clock .diamonds div:nth-child(4) {
+  grid-area: 4/2;
+}
+
+/* Animația diamantelor */
+@-webkit-keyframes sparkle {
+  0%, 100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(1.3);
+            transform: scale(1.3);
+    opacity: 0.6;
+  }
+}
+@keyframes sparkle {
+  0%, 100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    -webkit-transform: scale(1.3);
+            transform: scale(1.3);
+    opacity: 0.6;
+  }
+}/*# sourceMappingURL=clock.css.map */
